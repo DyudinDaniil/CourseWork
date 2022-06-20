@@ -50,6 +50,29 @@ class ProfileActivity : AppCompatActivity() {
                 }
                 R.id.request -> {
                     intent = Intent(this, RequestActivity::class.java)
+
+                    val emailList = ArrayList<String>()
+                    val passwordList = ArrayList<String>()
+                    val nameList = ArrayList<String>()
+                    val aboutList = ArrayList<String>()
+                    val categoryList = ArrayList<String>()
+                    val timeList = ArrayList<String>()
+                    for (item in usersList) {
+                        emailList.add(item.email)
+                        passwordList.add(item.password)
+                        nameList.add(item.name)
+                        aboutList.add(item.about)
+                        categoryList.add(item.category)
+                        timeList.add(item.time)
+                    }
+                    intent.putExtra("email_list", emailList)
+                    intent.putExtra("password_list", passwordList)
+                    intent.putExtra("name_list", nameList)
+                    intent.putExtra("about_list", aboutList)
+                    intent.putExtra("category_list", categoryList)
+                    intent.putExtra("time_list", timeList)
+                    intent.putExtra("user_email", userEmail)
+
                     startActivity(intent)
                     finish()
                 }

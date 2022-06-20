@@ -3,17 +3,18 @@ package com.daniildyudin.mentors
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.daniildyudin.mentors.Adapters.CardAdapter
 import com.daniildyudin.mentors.Models.User
 import com.daniildyudin.mentors.databinding.ActivityFeedBinding
 
-class FeedActivity : AppCompatActivity() {
+class FeedActivity : AppCompatActivity(), CardAdapter.Listener {
 
     lateinit var binding: ActivityFeedBinding
     var usersList = ArrayList<User>()
     lateinit var userEmail: String
-    private val adapter = CardAdapter()
+    private val adapter = CardAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +52,29 @@ class FeedActivity : AppCompatActivity() {
                 }
                 R.id.request -> {
                     intent = Intent(this, RequestActivity::class.java)
+
+                    val emailList = ArrayList<String>()
+                    val passwordList = ArrayList<String>()
+                    val nameList = ArrayList<String>()
+                    val aboutList = ArrayList<String>()
+                    val categoryList = ArrayList<String>()
+                    val timeList = ArrayList<String>()
+                    for (item in usersList) {
+                        emailList.add(item.email)
+                        passwordList.add(item.password)
+                        nameList.add(item.name)
+                        aboutList.add(item.about)
+                        categoryList.add(item.category)
+                        timeList.add(item.time)
+                    }
+                    intent.putExtra("email_list", emailList)
+                    intent.putExtra("password_list", passwordList)
+                    intent.putExtra("name_list", nameList)
+                    intent.putExtra("about_list", aboutList)
+                    intent.putExtra("category_list", categoryList)
+                    intent.putExtra("time_list", timeList)
+                    intent.putExtra("user_email", userEmail)
+
                     startActivity(intent)
                     finish()
                 }
@@ -69,6 +93,15 @@ class FeedActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onClickItem(user: User) {
+        intent = Intent(this, CardActivity::class.java)
+        intent.putExtra("item_name", user.name)
+        intent.putExtra("item_about", user.about)
+        intent.putExtra("item_category", user.category)
+        intent.putExtra("item_time", user.time)
+        startActivity(intent)
     }
 
     private fun init() {

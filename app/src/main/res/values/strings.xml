@@ -3,6 +3,7 @@
     <string name="email">Email</string>
     <string name="password">Пароль</string>
     <string name="name">Ваше имя</string>
+    <string name="name_of_expert">Имя</string>
     <string name="about">О себе</string>
     <string name="category">Навыки в сфере</string>
     <string name="chose_category">Выберите навык</string>
@@ -25,6 +26,7 @@
     <string name="edit_category">Изменить категорию</string>
     <string name="edit_time">Изменить поле время</string>
     <string name="save">Сохранить</string>
+    <string name="pull_request">Отправить заявку</string>
 
     <string-array name="categories">
         <item>Java</item>
